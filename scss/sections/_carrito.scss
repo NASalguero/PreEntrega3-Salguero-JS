@@ -1,0 +1,50 @@
+
+.main-carrito img {
+    width: 400px;
+    background-image: url(../resources/fondo.jpg);
+    background-size: cover;
+    padding: 30px;
+    border-radius: 60px;
+}
+
+.main-carrito {
+    display: flex;
+    height: 700px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.div-carrito {
+    display: flex;
+    width: 800px;
+    justify-content: space-around;
+}
+
+.div-carrito a {
+    color: $blanco;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: x-large;
+    text-decoration: none;
+    background-image: linear-gradient(to top, $oscuro 0%, $claro 100%);
+    padding: 5px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.div-carrito a:hover {
+    color: $blanco;
+}
+
+@media (max-width:426px) {
+    .div-carrito{
+        flex-direction: column;
+        width: auto;
+    }
+    .main-carrito h3{
+        margin: 10px 0;
+    }
+    .main-carrito{
+        height: auto;
+    }
+}
