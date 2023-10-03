@@ -1,7 +1,13 @@
-const catalogo = document.getElementById("catalogo")
+const catalogo = document.getElementById("catalogo");
+const imgCarrito = document.getElementsByClassName("imgCarrito");
+const carritoCompras = document.getElementById("carritoCompras");
+const navCart = document.getElementById("nav-cart")
 
+let imgCart = 0;
 
 const projectName = "Le Parfum d'Ange";
+
+
 
 let arrayPerfumes = [];
 
@@ -13,11 +19,29 @@ arrayPerfumes.push(perfume3);
 arrayPerfumes.push(perfume4);
 arrayPerfumes.push(perfume5);
 
+//STORAGE***********************************************************
+function saveStorage () {
+
+    localStorage.setItem( "carrito" , JSON.stringify(carrito));
+
+}
+
+function loadStorage () {
+
+    if (localStorage.getItem( "carrito" )){
+    let carrito = JSON.parse( localStorage.getItem( "carrito" ));
+    }else{
+        console.log("no hay nada");
+    }
+}
+
+
 
 let carrito = [];
 
 arrayPerfumes.forEach((perfume) => {
-    
+
+    // carrito.innerHTML = "";
     let contenido = document.createElement("div");
     contenido.setAttribute("data-aos", "fade-up")
     contenido.className = "frag-grid";
@@ -28,7 +52,7 @@ arrayPerfumes.forEach((perfume) => {
     
     `;
 
-    catalogo.append(contenido);
+    catalogo.appendChild(contenido);
 
     let agregarCarrito = document.createElement("button");
     agregarCarrito.innerText = "Agregar al carrito";
@@ -43,13 +67,39 @@ arrayPerfumes.forEach((perfume) => {
             diseñador: perfume._diseñador,
             precio: perfume._precio,
         })
-        console.log(carrito)
-    })
 
+        console.log(carrito);
+        // imgCart += 1;
+        saveStorage();
+    })
     
+
 
 });
 
+loadStorage();
+
+
+
+navCart.addEventListener("click", () =>{
+
+    carrito.forEach((perfume) => {
+    let contenidoCart = document.createElement("div");
+    contenidoCart.className = "contenidoCart";
+    contenidoCart.innerHTML = `
+        <img src="${perfume._imagen}">
+        <h3>${perfume._nombre} - ${perfume._diseñador}</h3>
+        <h4>$${perfume._precio}</h4>
+    `;
+
+    carritoCompras.append(contenidoCart);
+    console.log(carritoCompras)
+    });
+});
+
+
+// carrito.forEach((perfume) => {
+// });
 
 
 
@@ -57,8 +107,14 @@ arrayPerfumes.forEach((perfume) => {
 
 
 
+
+// if (imgCart != 0){
+//     imgCarrito.style.display = "none";
+// };
 
 /*
+
+
 arrayPerfumes.forEach((perfume) => {(perfume.setID())});
 arrayPerfumes.forEach((perfume) => {(perfume.setStock())});
 console.log(arrayPerfumes);
