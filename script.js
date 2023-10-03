@@ -26,18 +26,16 @@ function saveStorage () {
 
 }
 
-function loadStorage () {
+// function loadStorage () {
 
-    if (localStorage.getItem( "carrito" )){
-    let carrito = JSON.parse( localStorage.getItem( "carrito" ));
-    }else{
-        console.log("no hay nada");
-    }
-}
+//     if (localStorage.getItem( "carrito" )){
+//     let carrito = JSON.parse( localStorage.getItem( "carrito" ));
+//     }
+// }
 
 
 
-let carrito = [];
+let carrito = JSON.parse( localStorage.getItem( "carrito" )) || [];
 
 arrayPerfumes.forEach((perfume) => {
 
@@ -69,17 +67,13 @@ arrayPerfumes.forEach((perfume) => {
         })
 
         console.log(carrito);
-        // imgCart += 1;
+        imgCart += 1;
         saveStorage();
     })
     
 
 
 });
-
-loadStorage();
-
-
 
 navCart.addEventListener("click", () =>{
 
@@ -95,7 +89,13 @@ navCart.addEventListener("click", () =>{
     carritoCompras.append(contenidoCart);
     console.log(carritoCompras)
     });
+
+    if (imgCart != 0){
+    imgCarrito.style.display = "none";
+    };
 });
+
+
 
 
 // carrito.forEach((perfume) => {
@@ -103,16 +103,14 @@ navCart.addEventListener("click", () =>{
 
 
 
-
-
-
-
-
-// if (imgCart != 0){
-//     imgCarrito.style.display = "none";
-// };
-
 /*
+
+
+
+
+
+
+
 
 
 arrayPerfumes.forEach((perfume) => {(perfume.setID())});
