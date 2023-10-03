@@ -26,16 +26,16 @@ function saveStorage () {
 
 }
 
-// function loadStorage () {
+function loadStorage () {
 
-//     if (localStorage.getItem( "carrito" )){
-//     let carrito = JSON.parse( localStorage.getItem( "carrito" ));
-//     }
-// }
+    if (localStorage.getItem( "carrito" )){
+    let carrito = JSON.parse( localStorage.getItem( "carrito" ));
+    }
+}
 
+let carrito = [];
 
-
-let carrito = JSON.parse( localStorage.getItem( "carrito" )) || [];
+// let carrito = JSON.parse( localStorage.getItem( "carrito" )) || [];
 
 arrayPerfumes.forEach((perfume) => {
 
@@ -67,7 +67,7 @@ arrayPerfumes.forEach((perfume) => {
         })
 
         console.log(carrito);
-        imgCart += 1;
+        // imgCart += 1;
         saveStorage();
     })
     
@@ -75,25 +75,39 @@ arrayPerfumes.forEach((perfume) => {
 
 });
 
-navCart.addEventListener("click", () =>{
+loadStorage();
+
+navCart.addEventListener("click", () => {
 
     carrito.forEach((perfume) => {
-    let contenidoCart = document.createElement("div");
-    contenidoCart.className = "contenidoCart";
-    contenidoCart.innerHTML = `
-        <img src="${perfume._imagen}">
-        <h3>${perfume._nombre} - ${perfume._diseñador}</h3>
-        <h4>$${perfume._precio}</h4>
-    `;
+        let contenidoCart = document.createElement("div");
+        contenidoCart.style.display = "grid"
+        contenidoCart.innerHTML = `
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="${perfume.imagen}" class="img-fluid rounded-start" alt="${perfume.nombre}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">${perfume.nombre}</h5>
+                        <p class="card-text">${perfume.diseñador}</p>
+                        <p class="card-title">${perfume.precio}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
 
-    carritoCompras.append(contenidoCart);
-    console.log(carritoCompras)
+        carritoCompras.append(contenidoCart);
     });
 
-    if (imgCart != 0){
-    imgCarrito.style.display = "none";
-    };
+    const total = carrito.reduce((acumulador , perfume) => acumulador + perfume.precio, 0);
+    const compraTotal = document.createElement("h3");
+    compraTotal.innerHTML = `Total a pagar : $${total}`;
+    contenidoCart.append(compraTotal);
 });
+
 
 
 
