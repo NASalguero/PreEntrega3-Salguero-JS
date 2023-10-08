@@ -85,6 +85,8 @@ main img {
 }
 
 h3 {
+    display: flex;
+    justify-content: center;
     border-radius: 5px;
     padding: 3px;
     background-image: linear-gradient(to top, $oscuro 0%, $claro 100%);

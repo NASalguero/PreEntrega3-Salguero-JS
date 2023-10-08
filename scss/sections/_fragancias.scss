@@ -28,6 +28,15 @@
     }
 }
 
+.frag-cart {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "frag1 frag2"
+    ;
+    
+    
+}
 
 .fragancias {
     display: grid;

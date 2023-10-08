@@ -2,6 +2,7 @@ const catalogo = document.getElementById("catalogo");
 const imgCarrito = document.getElementsByClassName("imgCarrito");
 const carritoCompras = document.getElementById("carritoCompras");
 const navCart = document.getElementById("nav-cart")
+const totalCompras = document.getElementById("totalCompras")
 
 let imgCart = 0;
 
@@ -20,6 +21,9 @@ arrayPerfumes.push(perfume4);
 arrayPerfumes.push(perfume5);
 
 //STORAGE***********************************************************
+
+
+
 function saveStorage () {
 
     localStorage.setItem( "carrito" , JSON.stringify(carrito));
@@ -33,13 +37,13 @@ function loadStorage () {
     }
 }
 
-let carrito = [];
-
-// let carrito = JSON.parse( localStorage.getItem( "carrito" )) || [];
+// let carrito = [];
+// loadStorage()
+ let carrito = JSON.parse( localStorage.getItem( "carrito" )) || [];
 
 arrayPerfumes.forEach((perfume) => {
 
-    // carrito.innerHTML = "";
+    carrito.innerHTML = "";
     let contenido = document.createElement("div");
     contenido.setAttribute("data-aos", "fade-up")
     contenido.className = "frag-grid";
@@ -75,13 +79,15 @@ arrayPerfumes.forEach((perfume) => {
 
 });
 
-loadStorage();
+
 
 navCart.addEventListener("click", () => {
 
+    totalCompras.innerHTML = "";
+    carritoCompras.innerHTML = "";
     carrito.forEach((perfume) => {
         let contenidoCart = document.createElement("div");
-        contenidoCart.style.display = "grid"
+        carritoCompras.className = "frag-cart";
         contenidoCart.innerHTML = `
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
@@ -92,7 +98,7 @@ navCart.addEventListener("click", () => {
                     <div class="card-body">
                         <h5 class="card-title">${perfume.nombre}</h5>
                         <p class="card-text">${perfume.diseñador}</p>
-                        <p class="card-title">${perfume.precio}</p>
+                        <p class="card-title">$${perfume.precio}</p>
                     </div>
                 </div>
             </div>
@@ -101,11 +107,13 @@ navCart.addEventListener("click", () => {
 
         carritoCompras.append(contenidoCart);
     });
-
+    
     const total = carrito.reduce((acumulador , perfume) => acumulador + perfume.precio, 0);
+
     const compraTotal = document.createElement("h3");
     compraTotal.innerHTML = `Total a pagar : $${total}`;
-    contenidoCart.append(compraTotal);
+    totalCompras.append(compraTotal);
+    // carritoCompras.append(compraTotal);
 });
 
 
