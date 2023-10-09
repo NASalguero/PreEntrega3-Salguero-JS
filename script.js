@@ -1,8 +1,9 @@
 const catalogo = document.getElementById("catalogo");
 const imgCarrito = document.getElementsByClassName("imgCarrito");
 const carritoCompras = document.getElementById("carritoCompras");
-const navCart = document.getElementById("nav-cart")
-const totalCompras = document.getElementById("totalCompras")
+const navCart = document.getElementById("nav-cart");
+const totalCompras = document.getElementById("totalCompras");
+const welcome = document.getElementById("welcome");
 
 let imgCart = 0;
 
@@ -28,18 +29,18 @@ function saveStorage () {
 
     localStorage.setItem( "carrito" , JSON.stringify(carrito));
 
-}
+};
 
 function loadStorage () {
 
     if (localStorage.getItem( "carrito" )){
     let carrito = JSON.parse( localStorage.getItem( "carrito" ));
     }
-}
+};
 
 // let carrito = [];
 // loadStorage()
- let carrito = JSON.parse( localStorage.getItem( "carrito" )) || [];
+let carrito = JSON.parse( localStorage.getItem( "carrito" )) || [];
 
 arrayPerfumes.forEach((perfume) => {
 
@@ -60,7 +61,7 @@ arrayPerfumes.forEach((perfume) => {
     agregarCarrito.innerText = "Agregar al carrito";
     agregarCarrito.className = "btn2 hover2";
 
-    contenido.append(agregarCarrito)
+    contenido.append(agregarCarrito);
 
     agregarCarrito.addEventListener("click", () => {
         carrito.push({
@@ -73,7 +74,7 @@ arrayPerfumes.forEach((perfume) => {
         console.log(carrito);
         // imgCart += 1;
         saveStorage();
-    })
+    });
     
 
 
@@ -82,6 +83,10 @@ arrayPerfumes.forEach((perfume) => {
 
 
 navCart.addEventListener("click", () => {
+
+    welcome.innerHTML = `
+            <h3>Este es tu carrito:</h3>
+    `;
 
     totalCompras.innerHTML = "";
     carritoCompras.innerHTML = "";
